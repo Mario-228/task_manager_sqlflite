@@ -23,7 +23,7 @@ class CacheHelper {
     }
   }
 
-  static Object? getData<param>(String key) {
+  static Object? getData(String key) {
     return sharedPreferences.get(key);
   }
 }
