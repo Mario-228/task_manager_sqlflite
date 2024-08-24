@@ -28,4 +28,9 @@ class NotificationCubit extends Cubit<NotificationStates> {
     notificationService.displayNotification(title: title, body: body);
     emit(DisplayNotificationState());
   }
+
+  void secheduleNotification() {
+    notificationService.scheduleNotification();
+    emit(SecheduledNotificationState());
+  }
 }

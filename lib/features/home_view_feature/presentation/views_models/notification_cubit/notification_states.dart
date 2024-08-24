@@ -11,3 +11,5 @@ class IOSNotificationPermissionState extends NotificationStates {}
 class NotificationChangeState extends NotificationStates {}
 
 class DisplayNotificationState extends NotificationStates {}
+
+class SecheduledNotificationState extends NotificationStates {}

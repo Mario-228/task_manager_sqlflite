@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -97,5 +99,33 @@ class NotificationService {
         ],
       ),
     );
+  }
+
+  void scheduleNotification() {
+    try {
+      tz.initializeTimeZones();
+      final scheduledTime =
+          tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5));
+
+      flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        'Scheduled title',
+        'theme changes 5 seconds ago',
+        scheduledTime,
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+              'your channel id', 'your channel name',
+              channelDescription: 'your channel description'),
+        ),
+        // ignore: deprecated_member_use
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents
+            .time, // Schedule daily notification at specific time
+      );
+    } on Exception catch (e) {
+      print(e.toString() + "+++++++++++++++++++++++++++");
+    }
   }
 }
