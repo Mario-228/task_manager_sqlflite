@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager_sqlflite/core/cache_helper/cache_helper.dart';
 import 'package:task_manager_sqlflite/core/constants/constants.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/home_view.dart';
@@ -26,14 +27,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DarkModeCubit, DarkModeStates>(
-      builder: (context, state) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        themeMode: DarkModeCubit.get(context).isDark
-            ? ThemeMode.dark
-            : ThemeMode.light,
-        theme: ThemeData.light(useMaterial3: true),
-        darkTheme: ThemeData.dark(useMaterial3: true),
-        home: const HomeView(),
+      builder: (context, state) => ScreenUtilInit(
+        designSize: const Size(360, 690),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          themeMode: DarkModeCubit.get(context).isDark
+              ? ThemeMode.dark
+              : ThemeMode.light,
+          theme: ThemeData.light(useMaterial3: true),
+          darkTheme: ThemeData.dark(useMaterial3: true),
+          home: const HomeView(),
+        ),
       ),
     );
   }
