@@ -29,8 +29,8 @@ class NotificationCubit extends Cubit<NotificationStates> {
     emit(DisplayNotificationState());
   }
 
-  void secheduleNotification() {
-    notificationService.scheduleNotification();
+  Future<void> secheduleNotification() async {
+    await notificationService.scheduleNotification();
     emit(SecheduledNotificationState());
   }
 }

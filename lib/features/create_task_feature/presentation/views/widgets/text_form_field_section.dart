@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:task_manager_sqlflite/core/functions/custom_date_picker.dart';
+import 'package:task_manager_sqlflite/core/widgets/default_form_field.dart';
+
+class TextFormFieldSection extends StatelessWidget {
+  const TextFormFieldSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final TextEditingController titleController = TextEditingController();
+    final TextEditingController noteController = TextEditingController();
+    final TextEditingController dateController = TextEditingController();
+    DateTime selectedDate = DateTime.now();
+
+    return Column(
+      children: [
+        DefaultFormField(
+            type: TextInputType.text,
+            controller: titleController,
+            isPassword: false,
+            onError: "Title must not be empty",
+            hintText: "Enter your title",
+            title: "Title"),
+        DefaultFormField(
+            type: TextInputType.text,
+            controller: noteController,
+            isPassword: false,
+            onError: "Notes must not be empty",
+            hintText: "Enter your Notes",
+            title: "Note"),
+        DefaultFormField(
+          type: TextInputType.datetime,
+          controller: dateController,
+          isPassword: false,
+          onError: "Date must not be empty",
+          hintText: DateFormat.yMd().format(selectedDate),
+          title: "Date",
+          suffixIcon: Icons.calendar_month_outlined,
+          readOnly: true,
+          onPressed: () async {
+            DateTime? date = await customDatePicker(context);
+            if (date != null) {
+              dateController.text = DateFormat.yMd().format(date);
+            }
+          },
+        ),
+      ],
+    );
+  }
+}

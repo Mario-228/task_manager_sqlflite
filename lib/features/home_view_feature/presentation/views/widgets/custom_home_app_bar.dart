@@ -18,6 +18,7 @@ class CustomHomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           BlocProvider.of<NotificationCubit>(context).displayNotification(
               title: "Theme changed",
               body: !DarkModeCubit.get(context).isDark ? "Dark" : "Light");
+          // BlocProvider.of<NotificationCubit>(context).secheduleNotification();
           await DarkModeCubit.get(context).changeThemeMode();
         },
       ),

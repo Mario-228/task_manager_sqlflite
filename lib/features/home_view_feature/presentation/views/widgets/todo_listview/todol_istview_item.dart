@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/widgets/buttom.dart';
+import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/widgets/todo_listview/build_bottom_sheet.dart';
+import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/widgets/todo_listview/task_details.dart';
 
 class TodolIstviewItem extends StatelessWidget {
   const TodolIstviewItem({super.key});
@@ -19,7 +19,7 @@ class TodolIstviewItem extends StatelessWidget {
                 top: Radius.circular(0.r),
               ),
             ),
-            builder: (context) => _buildBottomSheet(context),
+            builder: (context) => const BuildBottomSheet(),
           );
         },
         child: Container(
@@ -31,32 +31,11 @@ class TodolIstviewItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(
-                  'Learn Flutter',
-                  style: TextStyle(color: Colors.white, fontSize: 15.sp),
-                ),
-                SizedBox(height: 5.h),
-                Row(
-                  children: [
-                    const Icon(
-                      FontAwesomeIcons.clock,
-                      size: 15,
-                      color: Colors.white,
-                    ),
-                    SizedBox(width: 5.w),
-                    const Text(
-                      '9:00 PM - 9.59 PM',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 5.h),
-                const Text(
-                  'We must learn flutter to improve our skills',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ]),
+              const TaskDetails(
+                  title: "Learn Flutter",
+                  time: "9:00PM - 10:00PM",
+                  description:
+                      "Flutter is a Google's UI toolkit for building beautiful, natively"),
               const Spacer(),
               Container(
                 width: 1.w,
@@ -72,28 +51,6 @@ class TodolIstviewItem extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildBottomSheet(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(20.h),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const ButtonSheetModel(
-              txt: "Task Completed", color: Color.fromARGB(255, 37, 77, 252)),
-          SizedBox(height: 10.h),
-          const ButtonSheetModel(txt: "Delete Task", color: Colors.red),
-          SizedBox(height: 20.h),
-          const ButtonSheetModel(
-            txt: "Close",
-            color: Colors.white,
-            colorBorder: Colors.grey,
-            colorTxt: Colors.black,
-          ),
-        ],
       ),
     );
   }
