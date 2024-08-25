@@ -5,6 +5,10 @@ class AddTaskCubit extends Cubit<AddTaskStates> {
   AddTaskCubit() : super(AddTaskInitialState());
 
   static AddTaskCubit get(context) => BlocProvider.of(context);
+  int selectedIndex = 0;
 
-  void getDateFromUser() {}
+  void setColorIndex(int index) {
+    selectedIndex = index;
+    emit(AddTaskColorState());
+  }
 }

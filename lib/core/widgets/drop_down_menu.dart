@@ -35,7 +35,7 @@ class CustomDropDownMenu<param> extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: Styles.textStyle16),
+        Text(title, style: Styles.textStyle18),
         SizedBox(height: 8.h),
         TextFormField(
           autofocus: autofocus,

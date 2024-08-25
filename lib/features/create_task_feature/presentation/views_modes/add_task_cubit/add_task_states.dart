@@ -3,3 +3,7 @@ abstract class AddTaskStates {
 }
 
 class AddTaskInitialState extends AddTaskStates {}
+
+class AddTaskColorState extends AddTaskStates {
+  AddTaskColorState();
+}

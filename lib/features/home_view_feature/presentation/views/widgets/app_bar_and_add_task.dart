@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:task_manager_sqlflite/core/functions/navigate_to.dart';
+import 'package:task_manager_sqlflite/core/widgets/custom_text_button.dart';
 import 'package:task_manager_sqlflite/features/create_task_feature/presentation/views/create_task_view.dart';
 
 class AppBarAndAddTask extends StatefulWidget {
@@ -36,23 +37,11 @@ class _AppBarAndAddTaskState extends State<AppBarAndAddTask> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Container(
-              height: 45.h,
-              width: 100.w,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  color: const Color.fromARGB(255, 37, 77, 252)),
-              child: TextButton(
-                onPressed: () => navigateTo(context, const CreateTaskView()),
-                child: Center(
-                  child: Text(
-                    '+ Add Task',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12.sp,
-                    ),
-                  ),
-                ),
+            CustomTextButton(
+              text: "+ Add Task",
+              onPressed: () => navigateTo(
+                context,
+                const CreateTaskView(),
               ),
             ),
           ],
