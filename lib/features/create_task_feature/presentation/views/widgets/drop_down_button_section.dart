@@ -10,8 +10,13 @@ class DropDownButtonSection extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController reminderController = TextEditingController();
     TextEditingController repeatController = TextEditingController();
-    List<int> reminderList = [5, 10, 15, 20];
-    List<String> repeatOptionsList = ["None", "Daily", "Weekly", "Monthly"];
+    const List<int> reminderList = [5, 10, 15, 20];
+    const List<String> repeatOptionsList = [
+      "None",
+      "Daily",
+      "Weekly",
+      "Monthly"
+    ];
     return Column(
       children: [
         CustomDropDownMenu<String>(
@@ -28,6 +33,12 @@ class DropDownButtonSection extends StatelessWidget {
                   value: value.toString(),
                   child: Text(
                     "$value minutes earlier",
+                    style: TextStyle(
+                      color: ThemeData.from(
+                              colorScheme: Theme.of(context).colorScheme)
+                          .colorScheme
+                          .onSurface,
+                    ),
                   ),
                 ),
               )
@@ -53,6 +64,12 @@ class DropDownButtonSection extends StatelessWidget {
                   value: value.toString(),
                   child: Text(
                     value,
+                    style: TextStyle(
+                      color: ThemeData.from(
+                              colorScheme: Theme.of(context).colorScheme)
+                          .colorScheme
+                          .onSurface,
+                    ),
                   ),
                 ),
               )

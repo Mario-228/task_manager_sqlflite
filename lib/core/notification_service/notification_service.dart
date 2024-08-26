@@ -5,6 +5,12 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
+  static const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'your channel id',
+    'your channel name',
+    description: 'your channel description',
+    importance: Importance.max,
+  );
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   void initialNotification(BuildContext context) async {
@@ -16,6 +22,11 @@ class NotificationService {
       onDidReceiveLocalNotification: (id, title, body, payload) =>
           myDidReceiveLocalNotification(id, title, body, payload, context),
     );
+
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
 
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings("appicon");
@@ -46,16 +57,12 @@ class NotificationService {
   Future<void> selectNotification(NotificationResponse notification) async {
     String? payload = notification.payload;
     if (payload != null) {
-      print('notification payload: $payload');
-    } else {
-      print("Notification Done");
-    }
+    } else {}
     // Get.to(() => SecondScreen(payload));
   }
 
   void displayNotification(
       {required String title, required String body}) async {
-    print("doing test");
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails('your channel id', 'your channel name',
             channelDescription: 'your channel description',
@@ -104,30 +111,28 @@ class NotificationService {
   Future<void> scheduleNotification() async {
     tz.initializeTimeZones();
     final scheduledTime =
-        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5));
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 3));
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       0,
-      'Scheduled title',
-      'theme changes 5 seconds ago',
+      'Test Notification',
+      'This is a test notification scheduled for 5 seconds later',
       scheduledTime,
       const NotificationDetails(
         android: AndroidNotificationDetails(
           'your channel id',
           'your channel name',
           channelDescription: 'your channel description',
-          playSound: true,
-          icon: 'appicon',
           importance: Importance.max,
           priority: Priority.high,
+          playSound: true,
+          icon: 'appicon',
         ),
       ),
       // ignore: deprecated_member_use
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
-      // matchDateTimeComponents: DateTimeComponents
-      //     .time, // Schedule daily notification at specific time
     );
   }
 }

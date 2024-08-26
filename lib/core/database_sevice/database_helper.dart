@@ -33,8 +33,6 @@ class DatabaseHelper {
                ${DatabaseConstants.taskRepeatColumnName} TEXT ,
                 ${DatabaseConstants.taskColorColumnName} INTEGER ,
                  ${DatabaseConstants.taskIsCompletedColumnName} INTEGER );''');
-
-    print("database created");
   }
 
   static Future<int> insertData(TaskModel task) async {
