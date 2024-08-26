@@ -42,9 +42,10 @@ class DatabaseHelper {
     return db!.insert(DatabaseConstants.taskTableName, task.toMap());
   }
 
-  static Future<int> updateData(String query) async {
+  static Future<int> updateData(TaskModel model) async {
     Database? db = await database;
-    return db!.rawUpdate(query);
+    return db!.update(DatabaseConstants.taskTableName, model.toMap(),
+        where: 'id=${model.id}');
   }
 
   static Future<int> deleteData(TaskModel task) async {

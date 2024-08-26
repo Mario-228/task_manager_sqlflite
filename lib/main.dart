@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pretty_bloc_observer/pretty_bloc_observer.dart';
 import 'package:task_manager_sqlflite/core/cache_helper/cache_helper.dart';
 import 'package:task_manager_sqlflite/core/constants/constants.dart';
+import 'package:task_manager_sqlflite/features/database_services_cubit/database_services_cubit.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/home_view.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views_models/dark_mode_cubit/dark_mode_cubit.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views_models/dark_mode_cubit/dark_mode_states.dart';
@@ -13,9 +15,17 @@ void main() async {
   if (CacheHelper.getData(Constants.isDark) == null) {
     await CacheHelper.setData(Constants.isDark, false);
   }
+  Bloc.observer = PrettyBlocObserver();
   runApp(
-    BlocProvider(
-      create: (context) => DarkModeCubit(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => DarkModeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DatabaseServicesCubit()..getTasks(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );

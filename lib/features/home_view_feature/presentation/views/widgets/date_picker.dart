@@ -1,6 +1,8 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_manager_sqlflite/features/database_services_cubit/database_services_cubit.dart';
+import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/widgets/todo_listview/todo_listview.dart';
 
 // ignore: must_be_immutable
 class CustomDatePicker extends StatefulWidget {
@@ -41,6 +43,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       onDateChange: (date) {
         setState(() {
           widget.selectedDate = date;
+          DatabaseServicesCubit.get(context).setDate(date: date);
         });
       },
     );

@@ -7,8 +7,8 @@ import 'package:task_manager_sqlflite/features/create_task_feature/presentation/
 import 'package:task_manager_sqlflite/features/create_task_feature/presentation/views/widgets/date_time_form_field_section.dart';
 import 'package:task_manager_sqlflite/features/create_task_feature/presentation/views/widgets/drop_down_button_section.dart';
 import 'package:task_manager_sqlflite/features/create_task_feature/presentation/views/widgets/text_form_field_section.dart';
-import 'package:task_manager_sqlflite/features/create_task_feature/presentation/views_modes/add_task_cubit/add_task_cubit.dart';
-import 'package:task_manager_sqlflite/features/create_task_feature/presentation/views_modes/add_task_cubit/add_task_states.dart';
+import 'package:task_manager_sqlflite/features/database_services_cubit/database_services_cubit.dart';
+import 'package:task_manager_sqlflite/features/database_services_cubit/database_services_states.dart';
 
 class CreateTaskViewBody extends StatelessWidget {
   const CreateTaskViewBody({super.key});
@@ -36,12 +36,12 @@ class CreateTaskViewBody extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   const ColorSection(),
-                  BlocBuilder<AddTaskCubit, AddTaskStates>(
+                  BlocBuilder<DatabaseServicesCubit, DatabaseServicesStates>(
                     builder: (context, state) => CustomTextButton(
                         text: "Create Task",
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            AddTaskCubit.get(context)
+                            DatabaseServicesCubit.get(context)
                                 .addTask(
                               TaskModel(
                                 title:
@@ -53,7 +53,8 @@ class CreateTaskViewBody extends StatelessWidget {
                                 endTime: DateTimeFormFieldSection.endTime.text,
                                 remind: DropDownButtonSection.selectedReminder,
                                 repeat: DropDownButtonSection.selectedRepeat,
-                                color: AddTaskCubit.get(context).selectedIndex,
+                                color: DatabaseServicesCubit.get(context)
+                                    .selectedIndex,
                                 isCompleted: 0,
                               ),
                             )

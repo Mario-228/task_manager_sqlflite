@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manager_sqlflite/core/notification_service/notification_service.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/widgets/home_view_body.dart';
-import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views_models/get_tasks_cubit/get_tasks_cubit.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views_models/notification_cubit/notification_cubit.dart';
 
 class HomeView extends StatelessWidget {
@@ -11,16 +10,9 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => NotificationCubit(NotificationService())
-            ..createNotification(context),
-        ),
-        BlocProvider(
-          create: (context) => GetTasksCubit()..getTasks(),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) =>
+          NotificationCubit(NotificationService())..createNotification(context),
       child: const Scaffold(
         appBar: CustomHomeAppBar(),
         body: HomeViewBody(),

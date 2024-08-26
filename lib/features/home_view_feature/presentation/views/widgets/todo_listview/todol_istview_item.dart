@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_manager_sqlflite/core/styles/styles.dart';
 import 'package:task_manager_sqlflite/features/create_task_feature/data/model/task_model.dart';
+import 'package:task_manager_sqlflite/features/create_task_feature/presentation/views/widgets/color_section.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/widgets/todo_listview/build_bottom_sheet.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/widgets/todo_listview/task_details.dart';
 
@@ -29,7 +31,7 @@ class TodolIstviewItem extends StatelessWidget {
           padding: EdgeInsets.all(10.h),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.r),
-            color: const Color.fromARGB(255, 37, 77, 252),
+            color: ColorSection.colors[model.color!],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,8 +49,9 @@ class TodolIstviewItem extends StatelessWidget {
               SizedBox(width: 10.w),
               Transform.rotate(
                 angle: -1.5708,
-                child:
-                    const Text('Todo', style: TextStyle(color: Colors.white)),
+                child: model.isCompleted == 1
+                    ? const Text('Complete', style: Styles.textStyle14)
+                    : const Text('Todo', style: Styles.textStyle14),
               ),
             ],
           ),
