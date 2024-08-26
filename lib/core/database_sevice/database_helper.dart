@@ -47,9 +47,9 @@ class DatabaseHelper {
     return db!.rawUpdate(query);
   }
 
-  static Future<int> deleteData(String query) async {
+  static Future<int> deleteData(TaskModel task) async {
     Database? db = await database;
-    return db!.rawDelete(query);
+    return db!.delete(DatabaseConstants.taskTableName, where: "id=${task.id}");
   }
 
   static Future<List<Map<String, Object?>>> getData(String query) async {

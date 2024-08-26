@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_manager_sqlflite/features/create_task_feature/data/model/task_model.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/widgets/todo_listview/build_bottom_sheet.dart';
 import 'package:task_manager_sqlflite/features/home_view_feature/presentation/views/widgets/todo_listview/task_details.dart';
 
 class TodolIstviewItem extends StatelessWidget {
-  const TodolIstviewItem({super.key});
-
+  const TodolIstviewItem({super.key, required this.model});
+  final TaskModel model;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +20,9 @@ class TodolIstviewItem extends StatelessWidget {
                 top: Radius.circular(0.r),
               ),
             ),
-            builder: (context) => const BuildBottomSheet(),
+            builder: (context) => BuildBottomSheet(
+              model: model,
+            ),
           );
         },
         child: Container(
@@ -31,11 +34,10 @@ class TodolIstviewItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const TaskDetails(
-                  title: "Learn Flutter",
-                  time: "9:00PM - 10:00PM",
-                  description:
-                      "Flutter is a Google's UI toolkit for building beautiful, natively"),
+              TaskDetails(
+                  title: model.title!,
+                  time: "${model.startTime} - ${model.endTime}",
+                  description: model.note!),
               const Spacer(),
               Container(
                 width: 1.w,

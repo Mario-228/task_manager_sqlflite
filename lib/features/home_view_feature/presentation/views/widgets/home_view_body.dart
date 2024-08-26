@@ -12,6 +12,7 @@ class HomeViewBody extends StatelessWidget {
     final DateTime selectedDate = DateTime.now();
 
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),
         child: Column(
