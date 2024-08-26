@@ -4,11 +4,12 @@ import 'package:task_manager_sqlflite/core/widgets/default_form_field.dart';
 
 class DateTimeFormFieldSection extends StatelessWidget {
   const DateTimeFormFieldSection({super.key});
-
+  static TextEditingController startTime = TextEditingController();
+  static TextEditingController endTime = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    TextEditingController startTime = TextEditingController();
-    TextEditingController endTime = TextEditingController();
+    startTime.clear();
+    endTime.clear();
     return Row(
       children: [
         Expanded(

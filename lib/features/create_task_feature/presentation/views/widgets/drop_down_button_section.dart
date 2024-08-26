@@ -4,6 +4,8 @@ import 'package:task_manager_sqlflite/core/widgets/drop_down_menu.dart';
 class DropDownButtonSection extends StatelessWidget {
   const DropDownButtonSection({super.key});
 
+  static int selectedReminder = 0;
+  static String selectedRepeat = "None";
   @override
   Widget build(BuildContext context) {
     TextEditingController reminderController = TextEditingController();
@@ -32,6 +34,7 @@ class DropDownButtonSection extends StatelessWidget {
               .toList(),
           onChanged: (value) {
             if (value != null) {
+              selectedReminder = int.parse(value);
               reminderController.text = "$value minutes earlier";
             }
           },
@@ -56,6 +59,7 @@ class DropDownButtonSection extends StatelessWidget {
               .toList(),
           onChanged: (value) {
             if (value != null) {
+              selectedRepeat = value;
               repeatController.text = value;
             }
           },

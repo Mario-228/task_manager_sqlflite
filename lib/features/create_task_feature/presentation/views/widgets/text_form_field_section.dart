@@ -5,12 +5,14 @@ import 'package:task_manager_sqlflite/core/widgets/default_form_field.dart';
 
 class TextFormFieldSection extends StatelessWidget {
   const TextFormFieldSection({super.key});
-
+  static final TextEditingController titleController = TextEditingController();
+  static final TextEditingController noteController = TextEditingController();
+  static final TextEditingController dateController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final TextEditingController titleController = TextEditingController();
-    final TextEditingController noteController = TextEditingController();
-    final TextEditingController dateController = TextEditingController();
+    titleController.clear();
+    noteController.clear();
+    dateController.clear();
     DateTime selectedDate = DateTime.now();
 
     return Column(
